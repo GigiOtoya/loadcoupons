@@ -1,11 +1,12 @@
-type Coupon = {
-  p: HTMLParagraphElement;
-  a: HTMLAnchorElement;
-};
-
-const delay = (ms: number) => new Promise((res) => setTimeout(res, ms));
-
 const loadCoupons = (): void => {
+  type Coupon = {
+    p: HTMLParagraphElement;
+    a: HTMLAnchorElement;
+  };
+
+  const delay = (ms: number) => new Promise((res) => setTimeout(res, ms));
+  const randomInt = (min: number, max: number) => Math.floor(Math.random() * (max - min + 1) + min);
+
   const load = async function () {
     const couponSelector = "div.coupon-item";
     const pSelector = "p.coupon-brand-name";
@@ -25,7 +26,7 @@ const loadCoupons = (): void => {
         coupon.a.click();
         console.log(`${coupon.p.innerText} loaded`);
         notLoaded--;
-        await delay(500);
+        await delay(randomInt(100, 300));
       }
     }
 
